@@ -6,7 +6,7 @@ class userService {
     }
 
     create(user) {
-        this.userRepository.save(user)
+        return this.userRepository.save(user)
     }
 }
 

@@ -6,7 +6,7 @@ class userController {
     }
 
     createUser(req) {
-        this.userService.create(req)
+        return this.userService.create(req)
     }
 }
 
