@@ -12,6 +12,11 @@ function authMiddleware(req, res, next) {
     try {
         const decoded = jwt.verify(token, "secret_key")
         req.user = decoded
+
+        if (req.user.role !== "admin") {
+            return res.status(403).json({ error: "Forbidden" })
+        }
+
         next() 
     } catch (err) {
         res.status(401).json({ error: "Invalid token" })

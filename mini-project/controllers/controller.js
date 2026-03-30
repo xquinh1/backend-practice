@@ -19,9 +19,9 @@ class Controller {
         return this.service.getOrders(userId)
        }
     
-    checkout(data) {
+    checkout(userId, paymentType) {
         try {
-            return this.service.checkout(data.userId, data.paymentType, data.orders)
+            return this.service.checkout(userId, paymentType)
         } catch (err) {
             console.error("Checkout user error", err.message)
         }

@@ -13,6 +13,11 @@ class Service {
         if (!user.email || !user.email.includes("@") ) {
             throw new Error("Email require!!")
         }
+
+        if (!user.role) {
+            user.role = "user"
+        }
+        
         const newUser = this.userRepository.save(user)
 
         this.userSubject.notify(newUser)
@@ -69,7 +74,7 @@ class Service {
         const jwt = require("jsonwebtoken")
 
         const token = jwt.sign(
-            { userId: user.id },
+            { userId: user.id, role: user.role },
             "secret_key",
             { expiresIn: "1h" }
         )

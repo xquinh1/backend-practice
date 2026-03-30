@@ -28,7 +28,7 @@ module.exports = ( controller ) => {
 
     router.post("/users/checkout", authMiddleware, (req, res) => {
         try {
-            const result = controller.checkout(req.body)
+            const result = controller.checkout(req.user.userId, req.body.paymentType)
             res.json({ message: result })
         } catch (err) {
             res.status(400).json({ error: err.message })
