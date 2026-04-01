@@ -27,9 +27,9 @@ class Controller {
         }
     }
 
-    login(req, res) {
+    async login(req, res) {
         try {
-            const token = this.service.login(req.body.email)
+            const token = await this.service.login(req.body.email)
             res.json({ token })
         } catch (err) {
             res.status(400).json({ error: err.message })

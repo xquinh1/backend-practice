@@ -6,7 +6,7 @@ class Service {
         this.userSubject = userSubject
     }
 
-    createUser(user) {
+    async createUser(user) {
         if (!user.name) {
             throw new Error("Name require!!")
         }
@@ -22,15 +22,15 @@ class Service {
 
         this.userSubject.notify(newUser)
 
-        return newUser
+        return await newUser
     }
 
     getAll() {
         return this.userRepository.findAll()
     }
 
-    getOrders(userId) {
-        const user = this.userRepository.findById(userId)
+    async getOrders(userId) {
+        const user = await this.userRepository.findById(userId)
 
         if (!user) {
             throw new Error("User not found")
@@ -39,8 +39,8 @@ class Service {
         return this.orderRepository.findByUserId(userId)
     }
 
-    checkout(userId, paymentType) {
-        const user = this.userRepository.findById(userId)
+    async checkout(userId, paymentType) {
+        const user = await this.userRepository.findById(userId)
         if (!user) {
             throw new Error("User not found")
         }
@@ -64,8 +64,8 @@ class Service {
         return order
     }
 
-    login(email) {
-        const user = this.userRepository.findAll().find(u => u.email === email)
+    async login(email) {
+        const user = await this.userRepository.findByEmail(email)
 
         if (!user) {
             throw new Error("User not found")
