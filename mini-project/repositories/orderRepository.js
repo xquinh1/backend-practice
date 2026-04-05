@@ -21,7 +21,14 @@ class OrderRepository {
             [userId]
         )
 
-        return result.rowss
+        return result.rows
+    }
+
+    async findAll() {
+        const result = await pool.query(
+            "SELECT * FROM orders"
+        )
+        return result.rows
     }
 
     // save(order) {

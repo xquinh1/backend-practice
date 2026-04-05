@@ -1,5 +1,7 @@
+const cors = require("cors")
 const express = require("express");
 const app = express();
+
 
 // Middleware
 app.use(express.json());
@@ -40,12 +42,13 @@ const controller = initializeDependencies();
 //     paymentType: "paypal",
 //   });
 
-//   // console.log(controller.getOrdersByUser(user));
-
 //   console.log("User name:", user.name, "| User email:", user.email);
 // }
 
 // demo(controller);
+
+//Cors
+app.use(cors())
 
 // Routes
 app.use("/", createRoutes(controller));

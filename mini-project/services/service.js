@@ -25,9 +25,14 @@ class Service {
         return await newUser
     }
 
-    getAll() {
-        return this.userRepository.findAll()
+    async getAll() {
+        return await this.userRepository.findAll()
     }
+
+    async getUserById(userId) {
+        return await this.userRepository.findById(userId)
+    }
+
 
     async getOrders(userId) {
         const user = await this.userRepository.findById(userId)
@@ -37,6 +42,10 @@ class Service {
         }
 
         return this.orderRepository.findByUserId(userId)
+    }
+
+    async getAllOrders() {
+        return await this.orderRepository.findAll()
     }
 
     async checkout(userId, paymentType) {

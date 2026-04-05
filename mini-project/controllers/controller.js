@@ -11,8 +11,17 @@ class Controller {
         }
     }
     
-    getUser() {
+    getUsers() {
         return this.service.getAll()
+    }
+    
+    getOrders() {
+        return this.service.getAllOrders()
+    }
+    
+
+    async getUserById(userId) {
+        return await this.service.getUserById(userId)
     }
 
     getOrdersByUser(userId) {

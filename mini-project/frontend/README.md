@@ -1,18 +1,31 @@
-# React + Vite
+# Project Libraries, Languages, and SQL Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Front-end
 
-Currently, two official plugins are available:
+**Language:**
+- JavaScript (ES6), specifically JSX for React components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Libraries/Frameworks:**
+- React (with functional components and hooks: useState, useEffect)
+- React Router (`react-router-dom`)
+- Tailwind CSS (utility classes in JSX markup)
 
-## React Compiler
+## Backend
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+**Language:**
+- JavaScript (Node.js, CommonJS modules)
 
-Note: This will impact Vite dev & build performances.
+**Libraries/Frameworks:**
+- Express.js (web server framework)
+- Custom authentication middleware
 
-## Expanding the ESLint configuration
+## Server-side code
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js running Express app, using modular routing and controller pattern
+- User authentication and role checking (middleware)
+
+## SQL
+
+- No raw SQL is present in the shown code, but the backend likely interacts with a database to manage users and orders. The backend controller functions (e.g., `getUsers`, `getUserById`, `getOrdersByUserId`) are expected to perform SQL queries through ORM or raw queries, but these queries themselves are not exposed in the provided code.
+
+---

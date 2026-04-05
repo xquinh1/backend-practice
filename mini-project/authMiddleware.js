@@ -14,10 +14,6 @@ function authMiddleware(req, res, next) {
 
         req.user = decoded
 
-        if ( !req.user.role || req.user.role !== "admin") {
-            return res.status(403).json({ error: "Forbidden" })
-        }
-
         next() 
     } catch (err) {
         console.log("jwt error", err.message)

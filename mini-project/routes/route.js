@@ -13,14 +13,42 @@ module.exports = ( controller ) => {
         }
     })
 
-    router.get("/users", async (req, res) => {
-        await res.json(controller.getUsers())
+    router.get("/users", authMiddleware , async (req, res) => {
+        try {
+            const { role, userId } = req.user
+
+            if (role === "admin") {
+                const users = await controller.getUsers()
+                return res.status(200).json(users)
+            } 
+
+            const user = await controller.getUserById(Number(userId))
+            if (!user) {
+                return res.status(404).json({ error: "User not found" })
+            } 
+            return res.status(200).json([user])
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
     })
 
-    router.get("/users/:id/orders", async (req, res) => {
+    router.get("/users/:id/orders", authMiddleware, async (req, res) => {
         try {
-            const orders = await controller.getOrdersByUser(Number(req.params.id))
-            res.json(orders)
+            const { role, userId } = req.user      
+            const selectedUserId = Number(req.params.id)     
+            
+            if (selectedUserId !== userId && role !== "admin" ) {
+                return res.status(403).json({ error: "Forbidden" })
+            }
+
+            if (role === "admin") {
+                const orders = await controller.getOrdersByUserId(Number(req.params.id))
+                return res.status(200).json(orders)
+            } 
+
+            const orders = await controller.getOrdersByUserId(userId)
+            console.log("orders", orders)
+            return res.json(orders)
         } catch (err) {
             res.status(400).json({ error: err.message })
         }
