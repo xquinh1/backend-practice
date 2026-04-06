@@ -63,14 +63,12 @@ class Service {
             throw new Error("Invalid payment")
         }
         
-        payment.pay()
+        // const order = this.orderRepository.save({
+        //     userId,
+        //     amount: 100
+        // })     
 
-        const order = this.orderRepository.save({
-            userId,
-            amount: 100
-        })     
-
-        return order
+        // return order
     }
 
     async login(email) {

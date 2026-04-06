@@ -47,7 +47,6 @@ module.exports = ( controller ) => {
             } 
 
             const orders = await controller.getOrdersByUserId(userId)
-            console.log("orders", orders)
             return res.json(orders)
         } catch (err) {
             res.status(400).json({ error: err.message })

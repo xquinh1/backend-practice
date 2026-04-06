@@ -39,35 +39,47 @@ function Orders() {
         setLoading(false);
       });
   }, []);
+  
 
   return (
-    <div className="max-w-2xl mx-auto my-10 p-6 bg-white rounded shadow">
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Orders</h1>
+    <div className="max-w-2xl mx-auto my-10 p-4">
+      <h1 className="text-3xl font-extrabold mb-8 text-gray-900 text-center">Orders</h1>
       {loading ? (
-        <div className="text-gray-500">Loading...</div>
+        <div className="text-gray-500 text-center">Loading...</div>
       ) : error ? (
-        <div className="text-red-500">Error: {error}</div>
+        <div className="text-red-500 text-center">Error: {error}</div>
       ) : orders.length === 0 ? (
-        <div className="text-gray-500">No orders found.</div>
+        <div className="text-gray-500 text-center">No orders found.</div>
       ) : (
-        <ul className="divide-y divide-gray-200">
+        <div className="flex flex-col items-center">
           {orders.map((order) => (
-            <li key={order.id} className="py-4">
-              <div>
-                <span className="font-semibold text-gray-900">Order #{order.id}</span>
+            <div
+              key={order.id}
+              className="w-full bg-white rounded-lg shadow-md p-6 mb-6 transition transform hover:shadow-xl hover:scale-[1.02] duration-150"
+            >
+              <div className="flex flex-col space-y-2">
+                <div>
+                  <span className="font-semibold text-blue-600">Order ID:&nbsp;</span>
+                  <span className="text-gray-900">#{order.id}</span>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-700">User ID:&nbsp;</span>
+                  <span className="text-gray-800">{order.user_id || order.userId}</span>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-700">Total Amount:&nbsp;</span>
+                  <span className="text-green-600 font-medium">
+                    {order.amount !== undefined ? `$${order.amount}` : "No Amount"}
+                  </span>
+                </div>
+                <div>
+                  <span className="font-semibold text-gray-700">Payment Type:&nbsp;</span>
+                  <span className="text-gray-800">{order.payment_type || "No payment"}</span>
+                </div>
               </div>
-              <div className="text-sm text-gray-600">
-                {order.description || "No description"}
-              </div>
-              <div className="text-sm text-gray-500">
-                Status: {order.status}
-              </div>
-              <div className="text-sm text-gray-400">
-                Placed: {order.createdAt ? new Date(order.createdAt).toLocaleString() : "Unknown"}
-              </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

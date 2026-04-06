@@ -24,7 +24,7 @@ class Controller {
         return await this.service.getUserById(userId)
     }
 
-    getOrdersByUser(userId) {
+    getOrdersByUserId(userId) {
         return this.service.getOrders(userId)
        }
     
