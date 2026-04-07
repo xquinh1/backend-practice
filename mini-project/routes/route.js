@@ -4,9 +4,11 @@ const router = express.Router()
 
 module.exports = ( controller ) => {
 
-    router.post("/users", async (req, res) => {
+    router.post("/register", async (req, res) => {
         try {
-            const user = await controller.createUser(req.body)
+            const { name, email, role } = req.body
+
+            const user = await controller.createUser({ name, email, role })
             res.status(201).json(user)
         } catch (err) {
             res.status(400).json({ error: err.message })

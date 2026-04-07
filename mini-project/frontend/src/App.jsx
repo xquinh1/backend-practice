@@ -3,6 +3,7 @@ import Login from "./components/login";
 import Users from "./components/users";
 import Orders from "./components/orders";
 import Checkout from "./components/checkout";
+import Register from "./components/register";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -17,7 +18,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/users" element={
           <ProtectedRoute>
             <Users />
