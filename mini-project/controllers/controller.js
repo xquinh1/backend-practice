@@ -10,6 +10,14 @@ class Controller {
             console.error("Create user error:", err.message)
         }
     }
+
+    createOrder(data) {
+        try {
+            return this.service.createOrder(data)
+        } catch (err) {
+            console.error("Create user errow:", err.message)
+        }
+    }
     
     getUsers() {
         return this.service.getAll()

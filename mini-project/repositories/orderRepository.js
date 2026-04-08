@@ -8,8 +8,8 @@ class OrderRepository {
     
     async save(order) {
         const result = await pool.query(
-            "INSERT INTO orders (user_id, amount) VALUES ($1, $2, $3) RETURNING *",
-            [order.userId, order.amount, order.paymentType]
+            "INSERT INTO orders (user_id, amount, payment_type) VALUES ($1, $2, $3) RETURNING *",
+            [order.user_id, order.amount, order.payment_type]
         )
 
         return result.rows[0]

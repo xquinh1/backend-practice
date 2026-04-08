@@ -4,6 +4,7 @@ import Users from "./components/users";
 import Orders from "./components/orders";
 import Checkout from "./components/checkout";
 import Register from "./components/register";
+import CreateOrder from "./components/createOrder";
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem("token");
@@ -29,6 +30,12 @@ function App() {
         <Route path="/users/:id/orders" element={
           <ProtectedRoute>
             <Orders />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/create-order" element={
+          <ProtectedRoute>
+            <CreateOrder />
             </ProtectedRoute>
           }
         />

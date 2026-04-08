@@ -24,7 +24,7 @@ function Checkout() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ paymentType })
+        body: JSON.stringify({ payment_type })
       });
 
       if (!response.ok) {

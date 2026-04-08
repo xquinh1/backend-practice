@@ -25,6 +25,19 @@ class Service {
         return await newUser
     }
 
+    async createOrder(order) {
+        if (!order.amount) {
+            throw new Error("Amount require!!")
+        }
+        if (!order.payment_type) {
+            throw new Error("Payment require!!")
+        }
+
+        const newOrder = await this.orderRepository.save(order)
+
+        return newOrder
+    }
+
     async getAll() {
         return await this.userRepository.findAll()
     }
@@ -48,16 +61,16 @@ class Service {
         return await this.orderRepository.findAll()
     }
 
-    async checkout(userId, paymentType) {
+    async checkout(userId, payment_type) {
         const user = await this.userRepository.findById(userId)
         if (!user) {
             throw new Error("User not found")
         }
-        if (!paymentType) {
+        if (!payment_type) {
             throw new Error("Payment type required!!")
         }
 
-        const payment = this.paymentFactory.create(paymentType)
+        const payment = this.paymentFactory.create(payment_type)
 
         if (!payment || !payment.pay) {
             throw new Error("Invalid payment")

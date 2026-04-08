@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-          const token = localStorage.getItem("token");
-          const response = await fetch("http://localhost:3000/users", {
-              headers: {
-                  "Authorization": `Bearer ${token}`
-              }
-          });
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:3000/users", {
+          headers: {
+            "Authorization": `Bearer ${token}`,
+          },
+        });
 
-          const data = await response.json();
-          setUsers(data)
-          setLoading(false);
-
-        } catch (error) {
-          console.error("Error fetching users:", error);
-        } 
+        const data = await response.json();
+        setUsers(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching users:", error);
       }
+    };
     fetchUsers();
   }, []);
 
@@ -39,6 +38,7 @@ function Users() {
               <span className="text-gray-900 font-medium">{user.name}</span>
               <br />
               <span className="text-gray-500 text-sm">{user.email}</span>
+              <br />
               <button
                 className="mt-2 px-3 py-1 rounded bg-blue-500 text-white text-sm hover:bg-blue-600 transition"
                 onClick={() => {
@@ -48,6 +48,12 @@ function Users() {
                 }}
               >
                 View Orders
+              </button>
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition font-semibold"
+                onClick={() => navigate("/create-order")}
+              >
+                Create Order
               </button>
             </li>
           ))}

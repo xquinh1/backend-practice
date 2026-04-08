@@ -34,6 +34,18 @@ module.exports = ( controller ) => {
         }
     })
 
+    router.post("/create-order", authMiddleware, async (req, res) => {
+        try {
+            const { amount, payment_type } = req.body
+            const userId = req.user.userId
+
+            const order = await controller.createOrder({ user_id: userId, amount, payment_type })
+            res.json(order)
+        } catch (err) {
+            res.status(400).json({ error: err.message })
+        }
+    })
+
     router.get("/users/:id/orders", authMiddleware, async (req, res) => {
         try {
             const { role, userId } = req.user      
@@ -57,7 +69,7 @@ module.exports = ( controller ) => {
 
     router.post("/users/checkout", authMiddleware, async (req, res) => {
         try {
-            const result = await controller.checkout(req.user.userId, req.body.paymentType)
+            const result = await controller.checkout(req.user.userId, req.body.payment_type)
             res.json({ message: result })
         } catch (err) {
             res.status(400).json({ error: err.message })
